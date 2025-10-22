@@ -22,6 +22,13 @@ app.post('/api/users', (req, res) => {
   res.json(newUser);
 });
 
+app.put('/api/users/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const { FirstName, LastName, Email } = req.body;
+  users = users.map(user => user.Id === id ? { Id: id, FirstName, LastName, Email } : user);
+  res.json({ success: true });
+});
+
 app.delete('/api/users/:id', (req, res) => {
   const id = parseInt(req.params.id);
   users = users.filter(user => user.Id !== id);
